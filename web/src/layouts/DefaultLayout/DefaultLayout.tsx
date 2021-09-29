@@ -20,8 +20,9 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
 
   return (
     <>
-      <header style={{padding: "5px"}}>
+      <header style={{padding: "5px", margin: "0% 7%"}}>
         <span style={{color: "aquamarine", fontSize: "30px"}}>Ethchievements</span>
+        <img style={{height: "30px", position: "relative", top: "5px"}} src="eeth2.png" />
 
         <Button onClick={toggleAuth} variant="contained" style={{float: "right", backgroundColor: "aquamarine", color: "white", border: "none", borderRadius: "3px"}} >{isAuthenticated ? currentUser.address : "CONNECT"}</Button>
       </header>

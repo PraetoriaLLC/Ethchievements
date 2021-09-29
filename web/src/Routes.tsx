@@ -8,6 +8,7 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Set, Router, Route } from '@redwoodjs/router'
+import IntegrationsLayout from 'src/layouts/Dev/IntegrationsLayout'
 import AchievementsLayout from 'src/layouts/Dev/AchievementsLayout'
 import UsersLayout from 'src/layouts/Dev/UsersLayout'
 import DefaultLayout from 'src/layouts/DefaultLayout/DefaultLayout'
@@ -15,6 +16,12 @@ import DefaultLayout from 'src/layouts/DefaultLayout/DefaultLayout'
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={IntegrationsLayout}>
+        <Route path="/dev/integrations/new" page={DevIntegrationNewIntegrationPage} name="devNewIntegration" />
+        <Route path="/dev/integrations/{id}/edit" page={DevIntegrationEditIntegrationPage} name="devEditIntegration" />
+        <Route path="/dev/integrations/{id}" page={DevIntegrationIntegrationPage} name="devIntegration" />
+        <Route path="/dev/integrations" page={DevIntegrationIntegrationsPage} name="devIntegrations" />
+      </Set>
       <Set wrap={AchievementsLayout}>
         <Route path="/dev/achievements/new" page={DevAchievementNewAchievementPage} name="devNewAchievement" />
         <Route path="/dev/achievements/{id}/edit" page={DevAchievementEditAchievementPage} name="devEditAchievement" />

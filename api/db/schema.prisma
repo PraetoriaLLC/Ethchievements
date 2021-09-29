@@ -22,6 +22,24 @@ model AuthDetail {
   User      User?
 }
 
+model Integration {
+  name               String  @unique
+  id                 String  @id @default(uuid())
+  description        String
+  logoUrl            String
+  baseUrl            String
+  infoPath           String?
+  promoAchievementId String?
+  color              String
+  secondaryColor     String?
+}
+
+model Questline {
+  name          String @unique
+  id            String @id @default(uuid())
+  integrationId String
+}
+
 model Achievement {
   id   String @id @default(uuid())
   name String
