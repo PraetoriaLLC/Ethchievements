@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography"
 const Achievement = ({ach}) => {
   const {name, img} = ach
   return (
-    <Card style={{width: "250px"}}>
+    <Card style={{width: "250px", backgroundColor: "#141517", color: "white", borderRadius: "4px"}} elevation={1}>
       <CardMedia
         component="img"
         alt="Achievement Image"
@@ -14,8 +14,8 @@ const Achievement = ({ach}) => {
         image={img}
       />
        {/* <img src={img} style={{width: "250px", backgroundColor: "aquamarine"}} /> */}
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">{name}</Typography>
+      <CardContent style={{}}>
+        <span style={{fontSize: "20px"}}>{name}</span>
       </CardContent>
     </Card>
   )
