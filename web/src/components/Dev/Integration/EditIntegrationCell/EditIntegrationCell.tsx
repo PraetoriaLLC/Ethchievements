@@ -8,14 +8,14 @@ import { navigate, routes } from '@redwoodjs/router'
 import IntegrationForm from 'src/components/Dev/Integration/IntegrationForm'
 
 export const QUERY = gql`
-  query EditIntegrationById($id: String!) {
+  query EditIntegrationById($id: Int!) {
     integration: integration(id: $id) {
       name
       id
       description
       logoUrl
       baseUrl
-      infoPath
+      infoUrl
       promoAchievementId
       color
       secondaryColor
@@ -23,14 +23,14 @@ export const QUERY = gql`
   }
 `
 const UPDATE_INTEGRATION_MUTATION = gql`
-  mutation UpdateIntegrationMutation($id: String!, $input: UpdateIntegrationInput!) {
+  mutation UpdateIntegrationMutation($id: Int!, $input: UpdateIntegrationInput!) {
     updateIntegration(id: $id, input: $input) {
       name
       id
       description
       logoUrl
       baseUrl
-      infoPath
+      infoUrl
       promoAchievementId
       color
       secondaryColor

@@ -93,20 +93,20 @@ const IntegrationForm = (props) => {
         <FieldError name="baseUrl" className="rw-field-error" />
 
         <Label
-          name="infoPath"
+          name="infoUrl"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Info path
+          Info url
         </Label>
         <TextField
-          name="infoPath"
-          defaultValue={props.integration?.infoPath}
+          name="infoUrl"
+          defaultValue={props.integration?.infoUrl}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-        <FieldError name="infoPath" className="rw-field-error" />
+        <FieldError name="infoUrl" className="rw-field-error" />
 
         <Label
           name="promoAchievementId"

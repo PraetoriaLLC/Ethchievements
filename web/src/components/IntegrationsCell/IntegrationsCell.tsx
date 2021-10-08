@@ -1,11 +1,12 @@
 import type { FindIntegrations } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { ListItem, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, TextField, Typography } from '@material-ui/core'
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 
 export const QUERY = gql`
-  query FindIntegrations {
+  query FindIntegrationsForMenu {
     integrations {
+      id
       name
       logoUrl
     }
@@ -43,7 +44,7 @@ export const Success = ({ integrations }: CellSuccessProps<FindIntegrations>) =>
   )
 }
 
-const integrationMenuItem = integration => (<MenuItem>
+const integrationMenuItem = integration => (<MenuItem onClick={() => navigate(`/i/${integration.id}`)}>
   <ListItemIcon>
     <img src={integration.logoUrl} style={{width: "30px"}}/>
   </ListItemIcon>

@@ -25,11 +25,18 @@ describe('achievements', () => {
 
   scenario('creates a achievement', async () => {
     const result = await createAchievement({
-      input: { name: 'String', img: 'String' },
+      input: {
+        name: 'String',
+        img: 'String',
+        integrationId: 8366453,
+        description: 'String',
+      },
     })
 
     expect(result.name).toEqual('String')
     expect(result.img).toEqual('String')
+    expect(result.integrationId).toEqual(8366453)
+    expect(result.description).toEqual('String')
   })
 
   scenario('updates a achievement', async (scenario: StandardScenario) => {

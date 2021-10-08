@@ -1,5 +1,5 @@
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -24,11 +24,11 @@ model AuthDetail {
 
 model Integration {
   name               String  @unique
-  id                 String  @id @default(uuid())
+  id                 Int     @id @default(autoincrement())
   description        String
   logoUrl            String
   baseUrl            String
-  infoPath           String?
+  infoUrl            String?
   promoAchievementId String?
   color              String
   secondaryColor     String?
@@ -36,12 +36,26 @@ model Integration {
 
 model Questline {
   name          String @unique
-  id            String @id @default(uuid())
-  integrationId String
+  id            Int    @id @default(autoincrement())
+  integrationId Int
 }
 
 model Achievement {
-  id   String @id @default(uuid())
-  name String
-  img  String
+  id            Int     @id @default(autoincrement())
+  name          String
+  img           String
+  integrationId Int
+  questlineId   Int?
+  description   String
+  actionUrl     String?
+  score         Int?
+}
+
+model EarnedAchievement {
+  id            Int       @id @default(autoincrement())
+  address       String
+  achievementId Int
+  awardedAt     DateTime
+  mintedAt      DateTime?
+  isRare        Boolean?
 }

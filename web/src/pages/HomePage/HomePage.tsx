@@ -15,7 +15,7 @@ const HomePage = () => {
       />
       <Container style={{minWidth: "90%", margin: "auto"}}>
         <div style={{marginTop: "15px", marginBottom: "30px"}}>
-        <ShowcaseIntegrationCell id="d79ef80d-b463-45e2-8ff8-f57e173f389b" />
+        <ShowcaseIntegrationCell id={1} />
         </div>
         <AchievementsCell />
       </Container>

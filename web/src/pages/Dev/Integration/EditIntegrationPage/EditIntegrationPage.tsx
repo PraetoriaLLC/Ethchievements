@@ -1,10 +1,10 @@
 import EditIntegrationCell from 'src/components/Dev/Integration/EditIntegrationCell'
 
-type IntegrationsPageProps = {
-  id: String
+type IntegrationPageProps = {
+  id: Int
 }
 
-const EditIntegrationPage = ({ id }: IntegrationsPageProps) => {
+const EditIntegrationPage = ({ id }: IntegrationPageProps) => {
   return <EditIntegrationCell id={id} />
 }
 

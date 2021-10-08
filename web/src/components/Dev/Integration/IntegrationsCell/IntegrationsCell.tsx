@@ -13,7 +13,7 @@ export const QUERY = gql`
       description
       logoUrl
       baseUrl
-      infoPath
+      infoUrl
       promoAchievementId
       color
       secondaryColor

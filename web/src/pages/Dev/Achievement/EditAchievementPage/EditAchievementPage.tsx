@@ -1,7 +1,7 @@
 import EditAchievementCell from 'src/components/Dev/Achievement/EditAchievementCell'
 
 type AchievementPageProps = {
-  id: String
+  id: Int
 }
 
 const EditAchievementPage = ({ id }: AchievementPageProps) => {

@@ -1,11 +1,11 @@
 export const schema = gql`
   type Integration {
     name: String!
-    id: String!
+    id: Int!
     description: String!
     logoUrl: String!
     baseUrl: String!
-    infoPath: String
+    infoUrl: String
     promoAchievementId: String
     color: String!
     secondaryColor: String
@@ -13,7 +13,7 @@ export const schema = gql`
 
   type Query {
     integrations: [Integration!]!
-    integration(id: String!): Integration
+    integration(id: Int!): Integration
   }
 
   input CreateIntegrationInput {
@@ -21,7 +21,7 @@ export const schema = gql`
     description: String!
     logoUrl: String!
     baseUrl: String!
-    infoPath: String
+    infoUrl: String
     promoAchievementId: String
     color: String!
     secondaryColor: String
@@ -32,7 +32,7 @@ export const schema = gql`
     description: String
     logoUrl: String
     baseUrl: String
-    infoPath: String
+    infoUrl: String
     promoAchievementId: String
     color: String
     secondaryColor: String
@@ -40,7 +40,7 @@ export const schema = gql`
 
   type Mutation {
     createIntegration(input: CreateIntegrationInput!): Integration!
-    updateIntegration(id: String!, input: UpdateIntegrationInput!): Integration!
-    deleteIntegration(id: String!): Integration!
+    updateIntegration(id: Int!, input: UpdateIntegrationInput!): Integration!
+    deleteIntegration(id: Int!): Integration!
   }
 `

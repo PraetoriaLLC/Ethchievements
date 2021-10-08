@@ -5,7 +5,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { QUERY } from 'src/components/Dev/Integration/IntegrationsCell'
 
 const DELETE_INTEGRATION_MUTATION = gql`
-  mutation DeleteIntegrationMutation($id: String!) {
+  mutation DeleteIntegrationMutation($id: Int!) {
     deleteIntegration(id: $id) {
       id
     }
@@ -66,7 +66,7 @@ const IntegrationsList = ({ integrations }) => {
             <th>Description</th>
             <th>Logo url</th>
             <th>Base url</th>
-            <th>Info path</th>
+            <th>Info url</th>
             <th>Promo achievement id</th>
             <th>Color</th>
             <th>Secondary color</th>
@@ -81,7 +81,7 @@ const IntegrationsList = ({ integrations }) => {
               <td>{truncate(integration.description)}</td>
               <td>{truncate(integration.logoUrl)}</td>
               <td>{truncate(integration.baseUrl)}</td>
-              <td>{truncate(integration.infoPath)}</td>
+              <td>{truncate(integration.infoUrl)}</td>
               <td>{truncate(integration.promoAchievementId)}</td>
               <td>{truncate(integration.color)}</td>
               <td>{truncate(integration.secondaryColor)}</td>

@@ -47,3 +47,9 @@ export const deleteAchievement = ({
     where: { id },
   })
 }
+
+export const integrationAchievements = ({id}) => {
+  return db.achievement.findMany({
+    where: { integrationId: id}
+  })
+}

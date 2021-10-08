@@ -16,6 +16,16 @@ import DefaultLayout from 'src/layouts/DefaultLayout/DefaultLayout'
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={DefaultLayout}>
+        <Route path="/" page={HomePage} name="home" />
+        <Route path="/i/{id}" page={IntegrationPage} name="integration" />
+      </Set>
+      <Set wrap={UsersLayout}>
+        <Route path="/dev/users/new" page={DevUserNewUserPage} name="devNewUser" />
+        <Route path="/dev/users/{id}/edit" page={DevUserEditUserPage} name="devEditUser" />
+        <Route path="/dev/users/{id}" page={DevUserUserPage} name="devUser" />
+        <Route path="/dev/users" page={DevUserUsersPage} name="devUsers" />
+      </Set>
       <Set wrap={IntegrationsLayout}>
         <Route path="/dev/integrations/new" page={DevIntegrationNewIntegrationPage} name="devNewIntegration" />
         <Route path="/dev/integrations/{id}/edit" page={DevIntegrationEditIntegrationPage} name="devEditIntegration" />
@@ -27,15 +37,6 @@ const Routes = () => {
         <Route path="/dev/achievements/{id}/edit" page={DevAchievementEditAchievementPage} name="devEditAchievement" />
         <Route path="/dev/achievements/{id}" page={DevAchievementAchievementPage} name="devAchievement" />
         <Route path="/dev/achievements" page={DevAchievementAchievementsPage} name="devAchievements" />
-      </Set>
-      <Set wrap={DefaultLayout}>
-        <Route path="/" page={HomePage} name="home" />
-      </Set>
-      <Set wrap={UsersLayout}>
-        <Route path="/dev/users/new" page={DevUserNewUserPage} name="devNewUser" />
-        <Route path="/dev/users/{id}/edit" page={DevUserEditUserPage} name="devEditUser" />
-        <Route path="/dev/users/{id}" page={DevUserUserPage} name="devUser" />
-        <Route path="/dev/users" page={DevUserUsersPage} name="devUsers" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>

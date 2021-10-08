@@ -5,7 +5,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { QUERY } from 'src/components/Dev/Achievement/AchievementsCell'
 
 const DELETE_ACHIEVEMENT_MUTATION = gql`
-  mutation DeleteAchievementMutation($id: String!) {
+  mutation DeleteAchievementMutation($id: Int!) {
     deleteAchievement(id: $id) {
       id
     }
@@ -64,6 +64,11 @@ const AchievementsList = ({ achievements }) => {
             <th>Id</th>
             <th>Name</th>
             <th>Img</th>
+            <th>Integration id</th>
+            <th>Questline id</th>
+            <th>Description</th>
+            <th>Action url</th>
+            <th>Score</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -73,6 +78,11 @@ const AchievementsList = ({ achievements }) => {
               <td>{truncate(achievement.id)}</td>
               <td>{truncate(achievement.name)}</td>
               <td>{truncate(achievement.img)}</td>
+              <td>{truncate(achievement.integrationId)}</td>
+              <td>{truncate(achievement.questlineId)}</td>
+              <td>{truncate(achievement.description)}</td>
+              <td>{truncate(achievement.actionUrl)}</td>
+              <td>{truncate(achievement.score)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

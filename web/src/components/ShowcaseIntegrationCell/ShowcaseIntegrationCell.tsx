@@ -5,14 +5,14 @@ import { Paper, Grid, Button, Card, CardMedia, CardContent, Typography } from '@
 import { Link, routes } from '@redwoodjs/router'
 
 export const QUERY = gql`
-  query FindIntegrationById($id: String!) {
+  query FindIntegration($id: Int!) {
     integration: integration(id: $id) {
       name
       id
       description
       logoUrl
       baseUrl
-      infoPath
+      infoUrl
       promoAchievementId
       color
       secondaryColor
@@ -50,8 +50,8 @@ export const Success = ({ integration }: CellSuccessProps<FindIntegrationById>) 
         <Grid xs={4}>
         <div style={{marginLeft: "80px"}}>
           <img src="https://pbs.twimg.com/profile_images/1186270065085370368/J1YJtvdI_400x400.jpg" style={{width: "300px", borderRadius: "5px"}} />
-            <Typography variant="h5" >Saaver</Typography>
-            <Typography >Make a deposit in Aave</Typography>
+            <span style={{display: 'block', fontSize: "25px"}}>Saaver</span>
+            <span style={{display: 'block'}}>Make a deposit in Aave</span>
             <Link to="/i/aave" style={{textDecoration: "none", color: "aquamarine"}}>View more achievements for {integration.name}</Link>
           </div>
         </Grid>

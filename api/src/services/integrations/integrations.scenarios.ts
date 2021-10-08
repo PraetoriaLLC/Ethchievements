@@ -3,14 +3,14 @@ import type { Prisma } from '@prisma/client'
 export const standard = defineScenario<Prisma.IntegrationCreateArgs>({
   integration: {
     one: {
-      name: 'String8829021',
+      name: 'String4484460',
       description: 'String',
       logoUrl: 'String',
       baseUrl: 'String',
       color: 'String',
     },
     two: {
-      name: 'String489374',
+      name: 'String8789348',
       description: 'String',
       logoUrl: 'String',
       baseUrl: 'String',

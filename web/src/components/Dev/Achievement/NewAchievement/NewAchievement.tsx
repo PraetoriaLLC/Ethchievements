@@ -20,7 +20,8 @@ const NewAchievement = () => {
   })
 
   const onSave = (input) => {
-    createAchievement({ variables: { input } })
+    const castInput = Object.assign(input, { integrationId: parseInt(input.integrationId), questlineId: parseInt(input.questlineId), })
+    createAchievement({ variables: { input: castInput } })
   }
 
   return (

@@ -8,20 +8,30 @@ import { navigate, routes } from '@redwoodjs/router'
 import AchievementForm from 'src/components/Dev/Achievement/AchievementForm'
 
 export const QUERY = gql`
-  query EditAchievementById($id: String!) {
+  query EditAchievementById($id: Int!) {
     achievement: achievement(id: $id) {
       id
       name
       img
+      integrationId
+      questlineId
+      description
+      actionUrl
+      score
     }
   }
 `
 const UPDATE_ACHIEVEMENT_MUTATION = gql`
-  mutation UpdateAchievementMutation($id: String!, $input: UpdateAchievementInput!) {
+  mutation UpdateAchievementMutation($id: Int!, $input: UpdateAchievementInput!) {
     updateAchievement(id: $id, input: $input) {
       id
       name
       img
+      integrationId
+      questlineId
+      description
+      actionUrl
+      score
     }
   }
 `
@@ -41,7 +51,8 @@ export const Success = ({ achievement }: CellSuccessProps<EditAchievementById>) 
   })
 
   const onSave = (input, id) => {
-    updateAchievement({ variables: { id, input } })
+    const castInput = Object.assign(input, { integrationId: parseInt(input.integrationId), questlineId: parseInt(input.questlineId), })
+    updateAchievement({ variables: { id, input: castInput } })
   }
 
   return (

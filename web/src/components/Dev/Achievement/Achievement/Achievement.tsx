@@ -3,7 +3,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { Link, routes, navigate } from '@redwoodjs/router'
 
 const DELETE_ACHIEVEMENT_MUTATION = gql`
-  mutation DeleteAchievementMutation($id: String!) {
+  mutation DeleteAchievementMutation($id: Int!) {
     deleteAchievement(id: $id) {
       id
     }
@@ -61,6 +61,21 @@ const Achievement = ({ achievement }) => {
             </tr><tr>
               <th>Img</th>
               <td>{achievement.img}</td>
+            </tr><tr>
+              <th>Integration id</th>
+              <td>{achievement.integrationId}</td>
+            </tr><tr>
+              <th>Questline id</th>
+              <td>{achievement.questlineId}</td>
+            </tr><tr>
+              <th>Description</th>
+              <td>{achievement.description}</td>
+            </tr><tr>
+              <th>Action url</th>
+              <td>{achievement.actionUrl}</td>
+            </tr><tr>
+              <th>Score</th>
+              <td>{achievement.score}</td>
             </tr>
           </tbody>
         </table>

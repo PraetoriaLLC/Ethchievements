@@ -4,11 +4,16 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import Achievement from 'src/components/Dev/Achievement/Achievement'
 
 export const QUERY = gql`
-  query FindAchievementById($id: String!) {
+  query FindAchievementById($id: Int!) {
     achievement: achievement(id: $id) {
       id
       name
       img
+      integrationId
+      questlineId
+      description
+      actionUrl
+      score
     }
   }
 `

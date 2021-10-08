@@ -12,6 +12,10 @@ export const QUERY = gql`
       id
       name
       img
+      score
+      description
+      actionUrl
+      integrationId
     }
   }
 `

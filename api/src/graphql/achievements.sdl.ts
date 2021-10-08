@@ -1,28 +1,44 @@
 export const schema = gql`
   type Achievement {
-    id: String!
+    id: Int!
     name: String!
     img: String!
+    integrationId: Int!
+    questlineId: Int
+    description: String!
+    actionUrl: String
+    score: Int
   }
 
   type Query {
     achievements: [Achievement!]!
-    achievement(id: String!): Achievement
+    integrationAchievements: [Achievement!]!
+    achievement(id: Int!): Achievement
   }
 
   input CreateAchievementInput {
     name: String!
     img: String!
+    integrationId: Int!
+    questlineId: Int
+    description: String!
+    actionUrl: String
+    score: Int
   }
 
   input UpdateAchievementInput {
     name: String
     img: String
+    integrationId: Int
+    questlineId: Int
+    description: String
+    actionUrl: String
+    score: Int
   }
 
   type Mutation {
     createAchievement(input: CreateAchievementInput!): Achievement!
-    updateAchievement(id: String!, input: UpdateAchievementInput!): Achievement!
-    deleteAchievement(id: String!): Achievement!
+    updateAchievement(id: Int!, input: UpdateAchievementInput!): Achievement!
+    deleteAchievement(id: Int!): Achievement!
   }
 `

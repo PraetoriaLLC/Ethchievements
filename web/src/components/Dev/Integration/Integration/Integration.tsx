@@ -3,7 +3,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { Link, routes, navigate } from '@redwoodjs/router'
 
 const DELETE_INTEGRATION_MUTATION = gql`
-  mutation DeleteIntegrationMutation($id: String!) {
+  mutation DeleteIntegrationMutation($id: Int!) {
     deleteIntegration(id: $id) {
       id
     }
@@ -68,8 +68,8 @@ const Integration = ({ integration }) => {
               <th>Base url</th>
               <td>{integration.baseUrl}</td>
             </tr><tr>
-              <th>Info path</th>
-              <td>{integration.infoPath}</td>
+              <th>Info url</th>
+              <td>{integration.infoUrl}</td>
             </tr><tr>
               <th>Promo achievement id</th>
               <td>{integration.promoAchievementId}</td>
