@@ -23,7 +23,10 @@ dotenv.config()
 export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info('Invoked logchecker function')
 
-  const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL)
+  const provider = new ethers.providers.EtherscanProvider(
+    1,
+    process.env.ETHERSCAN_KEY
+  )
 
   const req: LogCheckerRequest = JSON.parse(event.body)
   const isValid = await checkValid(
@@ -50,25 +53,38 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
 }
 
 async function checkValid(
-  provider: ethers.providers.Provider,
+  provider: ethers.providers.EtherscanProvider,
   address: string,
+  integration: string,
+  task: string
+): Promise<boolean> {
+  const [ targetAddress, targetSignature ] = await getTargetInfo(integration, task)
+
+  const txs = await provider.getHistory(address)
+  const matches = txs.filter((tx) => {
+    const validAddress = tx.to?.toLowerCase() === targetAddress.toLowerCase()
+
+    const expectedSelector = ethers.utils
+      .keccak256(ethers.utils.toUtf8Bytes(targetSignature))
+      .slice(2, 8)
+    const actualSelector = tx.data.slice(2, 8)
+    const validSelector = expectedSelector === actualSelector
+
+    return validAddress && validSelector
+  })
+
+  return matches.length !== 0
+}
+
+//TODO: fetch target address from database
+async function getTargetInfo(
   _integration: string,
   _task: string
-): Promise<boolean> {
-  const filter = {
-    address: '0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9',
-    topics: [
-      '0xde6857219544bb5b7746f48ed30be6386fefc61b2f864cacf559893bf50fd951', // Deposit
-      null,
-      '0x' + address.slice(2).padStart(64, '0'),
-      null,
-    ],
-    fromBlock: 0,
-    toBlock: 'latest',
-  }
-
-  const logs = await provider.getLogs(filter)
-  return logs.length >= 1
+): Promise<string[]> {
+  return [
+    '0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9',
+    'deposit(address,uint256,address,uint16)',
+  ]
 }
 
 async function getMintSignature(
