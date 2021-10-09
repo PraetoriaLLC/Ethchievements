@@ -53,7 +53,8 @@ export const Success = ({ integration }: CellSuccessProps<EditIntegrationById>) 
   })
 
   const onSave = (input, id) => {
-    updateIntegration({ variables: { id, input } })
+    const castInput = Object.assign(input, { promoAchievementId: parseInt(input.promoAchievementId), })
+    updateIntegration({ variables: { id, input: castInput } })
   }
 
   return (

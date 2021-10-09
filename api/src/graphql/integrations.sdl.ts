@@ -6,7 +6,7 @@ export const schema = gql`
     logoUrl: String!
     baseUrl: String!
     infoUrl: String
-    promoAchievementId: String
+    promoAchievementId: Int
     color: String!
     secondaryColor: String
   }
@@ -22,7 +22,7 @@ export const schema = gql`
     logoUrl: String!
     baseUrl: String!
     infoUrl: String
-    promoAchievementId: String
+    promoAchievementId: Int
     color: String!
     secondaryColor: String
   }
@@ -33,7 +33,7 @@ export const schema = gql`
     logoUrl: String
     baseUrl: String
     infoUrl: String
-    promoAchievementId: String
+    promoAchievementId: Int
     color: String
     secondaryColor: String
   }

@@ -26,7 +26,7 @@ describe('integrations', () => {
   scenario('creates a integration', async () => {
     const result = await createIntegration({
       input: {
-        name: 'String4869295',
+        name: 'String9074329',
         description: 'String',
         logoUrl: 'String',
         baseUrl: 'String',
@@ -34,7 +34,7 @@ describe('integrations', () => {
       },
     })
 
-    expect(result.name).toEqual('String4869295')
+    expect(result.name).toEqual('String9074329')
     expect(result.description).toEqual('String')
     expect(result.logoUrl).toEqual('String')
     expect(result.baseUrl).toEqual('String')
@@ -45,10 +45,10 @@ describe('integrations', () => {
     const original = await integration({ id: scenario.integration.one.id })
     const result = await updateIntegration({
       id: original.id,
-      input: { name: 'String16094252' },
+      input: { name: 'String98639392' },
     })
 
-    expect(result.name).toEqual('String16094252')
+    expect(result.name).toEqual('String98639392')
   })
 
   scenario('deletes a integration', async (scenario: StandardScenario) => {

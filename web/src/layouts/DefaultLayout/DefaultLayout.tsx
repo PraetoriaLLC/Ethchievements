@@ -11,8 +11,8 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
 
   const toggleAuth = async () => {
     if (isAuthenticated) {
-      await logOut();
-      // navigate(routes.home());
+      // await logOut();
+      navigate("/collection/" + currentUser.address);
     } else {
       await logIn();
     }
