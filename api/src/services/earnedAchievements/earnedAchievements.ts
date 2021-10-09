@@ -15,6 +15,17 @@ export const earnedAchievements = ({address}) => {
   })
 }
 
+export const score = async ({address}) => {
+  const scorePromises = await db.earnedAchievement.findMany({
+    where: { address },
+    select: { achievementId: true}
+  })
+  .then(achievements => achievements.map(ach => db.achievement.findFirst({where: {id: ach.achievementId}, select: {score: true}})))
+
+  return (await Promise.all(scorePromises)).reduce((total, ach) => total + ach.score, 0)
+
+}
+
 export const earnedAchievement = ({
   id,
 }: Prisma.EarnedAchievementWhereUniqueInput) => {

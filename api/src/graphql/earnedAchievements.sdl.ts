@@ -10,6 +10,7 @@ export const schema = gql`
 
   type Query {
     earnedAchievements(address: String!): [EarnedAchievement!]!
+    score(address: String!): Int!
     earnedAchievement(id: Int!): EarnedAchievement
   }
 
