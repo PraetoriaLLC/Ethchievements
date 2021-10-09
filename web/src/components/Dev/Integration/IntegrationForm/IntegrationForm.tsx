@@ -4,6 +4,7 @@ import {
   FieldError,
   Label,
   TextField,
+  NumberField,
   Submit,
 } from '@redwoodjs/forms'
 
@@ -115,7 +116,7 @@ const IntegrationForm = (props) => {
         >
           Promo achievement id
         </Label>
-        <TextField
+        <NumberField
           name="promoAchievementId"
           defaultValue={props.integration?.promoAchievementId}
           className="rw-input"

@@ -2,7 +2,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import AchievementsCell from 'src/components/AchievementsCell'
 import { Container, Typography } from '@material-ui/core'
-import ShowcaseIntegrationCell from 'src/components/ShowcaseIntegrationCell'
+import ShowcaseIntegrationsCell from 'src/components/ShowcaseIntegrationsCell'
 
 const HomePage = () => {
   return (
@@ -15,7 +15,7 @@ const HomePage = () => {
       />
       <Container style={{minWidth: "90%", margin: "auto"}}>
         <div style={{marginTop: "15px", marginBottom: "30px"}}>
-        <ShowcaseIntegrationCell id={1} />
+        <ShowcaseIntegrationsCell id={1} />
         </div>
         <AchievementsCell />
       </Container>

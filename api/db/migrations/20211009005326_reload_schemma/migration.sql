@@ -24,7 +24,7 @@ CREATE TABLE "Integration" (
     "logoUrl" TEXT NOT NULL,
     "baseUrl" TEXT NOT NULL,
     "infoUrl" TEXT,
-    "promoAchievementId" TEXT,
+    "promoAchievementId" INTEGER,
     "color" TEXT NOT NULL,
     "secondaryColor" TEXT,
 

@@ -20,7 +20,8 @@ const NewIntegration = () => {
   })
 
   const onSave = (input) => {
-    createIntegration({ variables: { input } })
+    const castInput = Object.assign(input, { promoAchievementId: parseInt(input.promoAchievementId), })
+    createIntegration({ variables: { input: castInput } })
   }
 
   return (

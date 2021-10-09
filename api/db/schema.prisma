@@ -29,7 +29,7 @@ model Integration {
   logoUrl            String
   baseUrl            String
   infoUrl            String?
-  promoAchievementId String?
+  promoAchievementId Int?
   color              String
   secondaryColor     String?
 }

@@ -1,8 +1,8 @@
 import { render, screen } from '@redwoodjs/testing/web'
-import { Loading, Empty, Failure, Success } from './ShowcaseIntegrationCell'
-import { standard } from './ShowcaseIntegrationCell.mock'
+import { Loading, Empty, Failure, Success } from './ScoreCell'
+import { standard } from './ScoreCell.mock'
 
-describe('ShowcaseIntegrationCell', () => {
+describe('ScoreCell', () => {
   it('renders Loading successfully', () => {
     expect(() => {
       render(<Loading />)
@@ -29,7 +29,7 @@ describe('ShowcaseIntegrationCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success showcaseIntegration={standard().showcaseIntegration} />)
+      render(<Success score={standard().score} />)
     }).not.toThrow()
   })
 })
