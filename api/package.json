@@ -6,6 +6,7 @@
     "@redwoodjs/api": "0.36.4",
     "eth-sig-util": "^3.0.1",
     "ethereumjs-util": "^7.1.0",
+    "ethers": "^5.4.7",
     "jsonwebtoken": "^8.5.1"
   }
 }

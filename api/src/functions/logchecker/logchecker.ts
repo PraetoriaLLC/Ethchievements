@@ -1,5 +1,8 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
 import { logger } from 'src/lib/logger'
+import { ethers } from 'ethers'
+const dotenv = require('dotenv')
+dotenv.config()
 
 /**
  * The handler function is your code that processes http request events.
@@ -17,8 +20,25 @@ import { logger } from 'src/lib/logger'
  * @param { Context } context - contains information about the invocation,
  * function, and execution environment.
  */
-export const handler = async (event: APIGatewayEvent, context: Context) => {
+export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info('Invoked logchecker function')
+
+  const provider = new ethers.providers.EtherscanProvider(
+    1,
+    process.env.ETHERSCAN_KEY
+  )
+
+  const req: LogCheckerRequest = JSON.parse(event.body)
+  const isValid = await checkValid(
+    provider,
+    req.address,
+    req.integration,
+    req.task
+  )
+
+  const sig = isValid
+    ? await getMintSignature(req.address, req.integration, req.task)
+    : ''
 
   return {
     statusCode: 200,
@@ -26,7 +46,65 @@ export const handler = async (event: APIGatewayEvent, context: Context) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      data: 'logchecker function',
+      isValid: isValid,
+      signature: sig,
     }),
   }
+}
+
+async function checkValid(
+  provider: ethers.providers.EtherscanProvider,
+  address: string,
+  integration: string,
+  task: string
+): Promise<boolean> {
+  const [ targetAddress, targetSignature ] = await getTargetInfo(integration, task)
+
+  const txs = await provider.getHistory(address)
+  const matches = txs.filter((tx) => {
+    const validAddress = tx.to?.toLowerCase() === targetAddress.toLowerCase()
+
+    const expectedSelector = ethers.utils
+      .keccak256(ethers.utils.toUtf8Bytes(targetSignature))
+      .slice(2, 8)
+    const actualSelector = tx.data.slice(2, 8)
+    const validSelector = expectedSelector === actualSelector
+
+    return validAddress && validSelector
+  })
+
+  return matches.length !== 0
+}
+
+//TODO: fetch target address from database
+async function getTargetInfo(
+  _integration: string,
+  _task: string
+): Promise<string[]> {
+  return [
+    '0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9',
+    'deposit(address,uint256,address,uint16)',
+  ]
+}
+
+async function getMintSignature(
+  address: string,
+  integration: string,
+  task: string
+): Promise<string> {
+  const owner = new ethers.Wallet(process.env.ETH_OWNER_KEY)
+
+  const messageHash = ethers.utils.solidityKeccak256(
+    ['address', 'string', 'string'],
+    [address, integration, task]
+  )
+  const messageHashBinary = ethers.utils.arrayify(messageHash)
+
+  return await owner.signMessage(messageHashBinary)
+}
+
+interface LogCheckerRequest {
+  integration: string
+  task: string
+  address: string
 }
