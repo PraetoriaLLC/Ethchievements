@@ -19,7 +19,7 @@ import { db } from 'src/lib/db'
  * function, and execution environment.
  */
 export const handler = async (event: APIGatewayEvent, context: Context) => {
-  const id = Number.parseInt(event.requestContext.path.replace("/nftdata/", ""))
+  const id = Number.parseInt(event.path.replace("/nftdata/", "").split("/")[0])
   const { name, description, img } = await db.achievement.findFirst({where: {id}, select: { name: true, description: true, img: true}})
   logger.info('Invoked nftdata function')
 

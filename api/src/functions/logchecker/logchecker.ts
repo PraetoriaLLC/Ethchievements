@@ -87,7 +87,7 @@ async function getTargetInfo(achievement: number): Promise<string[]> {
 
 async function getMintSignature(
   address: string,
-  achievement: string
+  achievement: number
 ): Promise<string> {
   const owner = new ethers.Wallet(process.env.ETH_OWNER_KEY)
 
