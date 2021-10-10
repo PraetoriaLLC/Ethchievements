@@ -7,7 +7,7 @@ export const schema = gql`
 
   type Query {
     requirements: [Requirement!]!
-    requirement(id: Int!): Requirement
+    requirement(achievementId: Int!): Requirement
   }
 
   input CreateRequirementInput {
@@ -24,7 +24,7 @@ export const schema = gql`
 
   type Mutation {
     createRequirement(input: CreateRequirementInput!): Requirement!
-    updateRequirement(id: Int!, input: UpdateRequirementInput!): Requirement!
-    deleteRequirement(id: Int!): Requirement!
+    updateRequirement(achievementId: Int!, input: UpdateRequirementInput!): Requirement!
+    deleteRequirement(achievementId: Int!): Requirement!
   }
 `
