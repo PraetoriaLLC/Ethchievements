@@ -20,5 +20,9 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ earnedAchievements }: CellSuccessProps<FindCollectionQuery>) => {
-  return <Paper elevation={4} style={{width: "80vw", margin: "auto", padding: "20px"}}>{earnedAchievements.map(({achievementId}) => <AchievementCell id={achievementId} />)}</Paper>
+  return (
+  <Paper elevation={4} style={{width: "85vw", margin: "auto", padding: "20px"}}>
+    {earnedAchievements.map(({achievementId}) => <AchievementCell id={achievementId} />)}
+  </Paper>
+  )
 }

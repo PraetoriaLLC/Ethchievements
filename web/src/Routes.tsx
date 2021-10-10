@@ -8,6 +8,7 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Set, Router, Route } from '@redwoodjs/router'
+import RequirementsLayout from 'src/layouts/Dev/RequirementsLayout'
 import EarnedAchievementsLayout from 'src/layouts/Dev/EarnedAchievementsLayout'
 import IntegrationsLayout from 'src/layouts/Dev/IntegrationsLayout'
 import AchievementsLayout from 'src/layouts/Dev/AchievementsLayout'
@@ -17,6 +18,12 @@ import DefaultLayout from 'src/layouts/DefaultLayout/DefaultLayout'
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={RequirementsLayout}>
+        <Route path="/dev/requirements/new" page={DevRequirementNewRequirementPage} name="devNewRequirement" />
+        <Route path="/dev/requirements/{id:Int}/edit" page={DevRequirementEditRequirementPage} name="devEditRequirement" />
+        <Route path="/dev/requirements/{id:Int}" page={DevRequirementRequirementPage} name="devRequirement" />
+        <Route path="/dev/requirements" page={DevRequirementRequirementsPage} name="devRequirements" />
+      </Set>
       <Set wrap={EarnedAchievementsLayout}>
         <Route path="/dev/earned-achievements/new" page={DevEarnedAchievementNewEarnedAchievementPage} name="devNewEarnedAchievement" />
         <Route path="/dev/earned-achievements/{id:Int}/edit" page={DevEarnedAchievementEditEarnedAchievementPage} name="devEditEarnedAchievement" />

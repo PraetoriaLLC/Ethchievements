@@ -59,3 +59,9 @@ model EarnedAchievement {
   mintedAt      DateTime?
   isRare        Boolean?
 }
+
+model Requirement {
+  achievementId Int    @id @unique
+  address       String
+  signature     String
+}

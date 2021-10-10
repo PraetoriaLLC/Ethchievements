@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid"
 import Achievement from '../Achievement/Achievement'
 import { ListItem, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, TextField } from '@material-ui/core'
 import IntegrationsCell from '../IntegrationsCell'
+import { useState } from 'react'
 
 
 export const QUERY = gql`
@@ -29,18 +30,21 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ achievements }: CellSuccessProps<AchievementsQuery>) => {
+  const [searchTerm, setSearchTerm] = useState("")
   return (
     <>
-      <TextField size="medium" label="Search Achievements" style={{marginBottom: "20px", marginLeft: "5px", width: "400px"}}/>
+      <TextField size="medium" label="Search Achievements" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} style={{marginBottom: "20px", marginLeft: "5px", width: "400px"}}/>
       <Grid container>
         <Grid item xs={10}>
           <Grid container spacing={0}>
             {achievements.map(ach => {
-              return (
-                <Grid item xs={3}>
-                  <Achievement ach={ach} />
-                </Grid>
-              )
+              if (searchTerm === "" || ach.name.includes(searchTerm)) {
+                return (
+                  <Grid item xs={3}>
+                    <Achievement ach={ach} />
+                  </Grid>
+                )
+              }
             })}
           </Grid>
         </Grid>

@@ -3,8 +3,11 @@ import { MetaTags } from '@redwoodjs/web'
 import AchievementsCell from 'src/components/AchievementsCell'
 import { Container, Typography } from '@material-ui/core'
 import ShowcaseIntegrationsCell from 'src/components/ShowcaseIntegrationsCell'
+import { useAuth } from "@redwoodjs/auth"
+import CollectionCell from 'src/components/CollectionCell'
 
 const HomePage = () => {
+  const { isAuthenticated, currentUser } = useAuth();
   return (
     <>
       <MetaTags
@@ -17,6 +20,9 @@ const HomePage = () => {
         <div style={{marginTop: "15px", marginBottom: "30px"}}>
         <ShowcaseIntegrationsCell id={1} />
         </div>
+        {isAuthenticated ? <div><h1>Your Collection</h1>
+          <CollectionCell address={currentUser.address} /></div> : <></>}
+        <h1>All Achievements</h1>
         <AchievementsCell />
       </Container>
 
