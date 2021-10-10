@@ -66,6 +66,15 @@ CREATE TABLE "EarnedAchievement" (
     PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Requirement" (
+    "achievementId" INTEGER NOT NULL,
+    "address" TEXT NOT NULL,
+    "signature" TEXT NOT NULL,
+
+    PRIMARY KEY ("achievementId")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User.address_unique" ON "User"("address");
 
@@ -77,6 +86,9 @@ CREATE UNIQUE INDEX "Integration.name_unique" ON "Integration"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Questline.name_unique" ON "Questline"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Requirement.achievementId_unique" ON "Requirement"("achievementId");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD FOREIGN KEY ("authDetailId") REFERENCES "AuthDetail"("id") ON DELETE CASCADE ON UPDATE CASCADE;

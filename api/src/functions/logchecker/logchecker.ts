@@ -1,6 +1,7 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
 import { logger } from 'src/lib/logger'
 import { ethers } from 'ethers'
+import { db } from 'src/lib/db'
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -58,7 +59,10 @@ async function checkValid(
   integration: string,
   task: string
 ): Promise<boolean> {
-  const [ targetAddress, targetSignature ] = await getTargetInfo(integration, task)
+  const [targetAddress, targetSignature] = await getTargetInfo(
+    integration,
+    task
+  )
 
   const txs = await provider.getHistory(address)
   const matches = txs.filter((tx) => {
@@ -76,15 +80,21 @@ async function checkValid(
   return matches.length !== 0
 }
 
-//TODO: fetch target address from database
+//0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9
+//deposit(address,uint256,address,uint16)
 async function getTargetInfo(
   _integration: string,
   _task: string
 ): Promise<string[]> {
-  return [
-    '0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9',
-    'deposit(address,uint256,address,uint16)',
-  ]
+  const res = await db.requirement.findFirst({
+    where: {
+      achievementId: parseInt(_task),
+    },
+  })
+  if (res === null) {
+    return ['', '']
+  }
+  return [res.address, res.signature]
 }
 
 async function getMintSignature(

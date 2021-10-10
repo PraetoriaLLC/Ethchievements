@@ -13,9 +13,9 @@ export const requirements = () => {
   return db.requirement.findMany()
 }
 
-export const requirement = ({ achievementId }: Prisma.RequirementWhereUniqueInput) => {
+export const requirement = ({ id }: Prisma.RequirementWhereUniqueInput) => {
   return db.requirement.findUnique({
-    where: { achievementId },
+    where: { id },
   })
 }
 
@@ -33,17 +33,17 @@ interface UpdateRequirementArgs extends Prisma.RequirementWhereUniqueInput {
   input: Prisma.RequirementUpdateInput
 }
 
-export const updateRequirement = ({ achievementId, input }: UpdateRequirementArgs) => {
+export const updateRequirement = ({ id, input }: UpdateRequirementArgs) => {
   return db.requirement.update({
     data: input,
-    where: { achievementId },
+    where: { id },
   })
 }
 
 export const deleteRequirement = ({
-  achievementId,
+  id,
 }: Prisma.RequirementWhereUniqueInput) => {
   return db.requirement.delete({
-    where: { achievementId },
+    where: { id },
   })
 }

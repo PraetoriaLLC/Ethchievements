@@ -25,10 +25,10 @@ describe('requirements', () => {
 
   scenario('creates a requirement', async () => {
     const result = await createRequirement({
-      input: { achievementId: 9928125, address: 'String', signature: 'String' },
+      input: { achievementId: 2825629, address: 'String', signature: 'String' },
     })
 
-    expect(result.achievementId).toEqual(9928125)
+    expect(result.achievementId).toEqual(2825629)
     expect(result.address).toEqual('String')
     expect(result.signature).toEqual('String')
   })
@@ -37,10 +37,10 @@ describe('requirements', () => {
     const original = await requirement({ id: scenario.requirement.one.id })
     const result = await updateRequirement({
       id: original.id,
-      input: { achievementId: 1817788 },
+      input: { achievementId: 7434333 },
     })
 
-    expect(result.achievementId).toEqual(1817788)
+    expect(result.achievementId).toEqual(7434333)
   })
 
   scenario('deletes a requirement', async (scenario: StandardScenario) => {
