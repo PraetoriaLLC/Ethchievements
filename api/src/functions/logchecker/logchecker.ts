@@ -30,15 +30,10 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
   )
 
   const req: LogCheckerRequest = JSON.parse(event.body)
-  const isValid = await checkValid(
-    provider,
-    req.address,
-    req.integration,
-    req.task
-  )
+  const isValid = await checkValid(provider, req.address, req.achievement)
 
   const sig = isValid
-    ? await getMintSignature(req.address, req.integration, req.task)
+    ? await getMintSignature(req.address, req.achievement)
     : ''
 
   return {
@@ -56,13 +51,9 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
 async function checkValid(
   provider: ethers.providers.EtherscanProvider,
   address: string,
-  integration: string,
-  task: string
+  achievement: number
 ): Promise<boolean> {
-  const [targetAddress, targetSignature] = await getTargetInfo(
-    integration,
-    task
-  )
+  const [targetAddress, targetSignature] = await getTargetInfo(achievement)
 
   const txs = await provider.getHistory(address)
   const matches = txs.filter((tx) => {
@@ -82,13 +73,10 @@ async function checkValid(
 
 //0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9
 //deposit(address,uint256,address,uint16)
-async function getTargetInfo(
-  _integration: string,
-  _task: string
-): Promise<string[]> {
+async function getTargetInfo(achievement: number): Promise<string[]> {
   const res = await db.requirement.findFirst({
     where: {
-      achievementId: parseInt(_task),
+      achievementId: achievement,
     },
   })
   if (res === null) {
@@ -99,14 +87,13 @@ async function getTargetInfo(
 
 async function getMintSignature(
   address: string,
-  integration: string,
-  task: string
+  achievement: string
 ): Promise<string> {
   const owner = new ethers.Wallet(process.env.ETH_OWNER_KEY)
 
   const messageHash = ethers.utils.solidityKeccak256(
-    ['address', 'string', 'string'],
-    [address, integration, task]
+    ['address', 'uint256'],
+    [address, achievement]
   )
   const messageHashBinary = ethers.utils.arrayify(messageHash)
 
@@ -114,7 +101,6 @@ async function getMintSignature(
 }
 
 interface LogCheckerRequest {
-  integration: string
-  task: string
+  achievement: number
   address: string
 }
